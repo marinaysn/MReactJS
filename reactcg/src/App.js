@@ -1,4 +1,5 @@
-//Temporary comment out to explore Hooks
+//Temporary comment out class to explore Hooks
+// uncomment functional aproach below
 
 import React, { Component } from 'react';
 import './App.css';
@@ -40,17 +41,14 @@ class App extends Component {
       <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
       <Person name={this.state.persons[3].name} age={this.state.persons[3].age} />
       </div>
-
-
     );
-   // return React.createElement('div', {className:'App'}, React.createElement('h1', null, 'Hi, Marina'), React.createElement('h3', null, 'React App'))
   }
 }
 
 export default App;
 
 
-// // Learning Hooks
+//  Learning Hooks
 // import React, { useState } from 'react';
 // import './App.css';
 // import Person from './Person/Person'
@@ -63,15 +61,17 @@ export default App;
 //         [{ name: 'Marina', age: 28 },
 //         { name: 'Pavel', age: 43 },
 //         { name: 'Alex', age: 15 },
-//         { name: 'Anna', age: 13 }],
-//       someOtherState: 'other state'
+//         { name: 'Anna', age: 13 }]
+//       //   ,
+//       // someOtherState: 'other state'
 //     }
 //   );
 
 
-//   useState(personState.someOtherState);
+//   //const [otherState, setOtherState] = useState(personState.someOtherState);
+//   const [otherState, setOtherState] = useState("some Other State");
 
-//   console.log(personState);
+//   //console.log(personState, otherState);
 
 //   const switchNameHandler = () => {
 //     setPersonState({
@@ -87,7 +87,7 @@ export default App;
 //     <div className="App">
 //       <h1>Hi, Marina</h1>
 //       <h3> React App</h3>
-
+// {console.log(personState, otherState)}
 //       <p>This is really working</p>
 //       <button onClick={switchNameHandler}>Switch Name</button>
 //       <Person name={personState.persons[0].name} age={personState.persons[0].age}>My hobby: Racing</Person>
@@ -99,6 +99,4 @@ export default App;
 // }
 
 // export default app;
-
-
 
