@@ -37,6 +37,14 @@ class App extends Component {
 
 
   render() {
+
+    const styleButton= {
+      background: 'rgb(204, 228, 248)',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
     return (
       <div className="App">
        <h1>Hi, Marina</h1>
@@ -45,7 +53,7 @@ class App extends Component {
       {console.log(this.state)}
 
       <p>This is really working</p>
-      <button onClick={() =>this.switchNameHandler('Max')}>Switch Name</button>
+      <button style={styleButton} onClick={() =>this.switchNameHandler('Max')}>Switch Name</button>
       <Person 
         name={this.state.persons[0].name} 
         age={this.state.persons[0].age}
