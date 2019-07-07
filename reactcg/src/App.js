@@ -50,7 +50,7 @@ class App extends Component {
        <h1>Hi, Marina</h1>
       <h3> React App</h3>
 
-      {console.log(this.state)}
+      {/* {console.log(this.state)} */}
 
       <p>This is really working</p>
       <button style={styleButton} onClick={() =>this.switchNameHandler('Max')}>Switch Name</button>
