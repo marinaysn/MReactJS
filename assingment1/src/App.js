@@ -20,6 +20,7 @@ export class App extends Component {
       <div className="App">
         <UserInput 
           change={this.nameInputStateChangeHandler}
+          currentName={this.state.userName[0]}
         />
         <UserOutput
           name={this.state.userName[0]}
