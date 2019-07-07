@@ -1,10 +1,35 @@
 import React, { Component } from 'react'
+import UserInput from './UserInput/UserInput'
+import UserOutput from './UserOutput/UserOutput'
 
 export class App extends Component {
+
+  state = { userName: ["Marina", "Jane", "Alex", "Lidia"] }
+
+  nameStateChangeHandler = (newName) => {
+    this.setState ( { userName: [newName, "Jack", "Bob", "Monique"] })
+  } 
+  
+  nameInputStateChangeHandler = (event) => {
+    this.setState ( { userName: [event.target.value, "Jack", "Bob", "Monique"] })
+  }
+
+
   render() {
     return (
-      <div>
-        
+      <div className="App">
+        <UserInput 
+          change={this.nameInputStateChangeHandler}
+        />
+        <UserOutput
+          name={this.state.userName[0]}
+          click={this.nameStateChangeHandler.bind(this, 'Victor')} 
+          />
+
+        <UserOutput 
+          name={this.state.userName[1]} 
+          />
+
       </div>
     )
   }
