@@ -8,37 +8,48 @@ import Person from './Person/Person'
 class App extends Component {
 
   state = {
-    persons: [{name: 'Marina', age: 28},
-    {name: 'Pavel', age: 43},
-    {name: 'Alex', age: 15},
-    {name: 'Anna', age: 13}],
-    someOtherState: 'other state'
+    persons: [{ name: 'Marina', age: 28 },
+    { name: 'Pavel', age: 43 },
+    { name: 'Alex', age: 15 },
+    { name: 'Anna', age: 13 }],
+    someOtherState: 'other state',
+    showPerson: false
   };
 
-  
+
 
   switchNameHandler = (newName) => {
-    this.setState({persons: 
-      [{name: newName, age: 43},
-      {name: 'Pavel', age: 43},
-      {name: 'Alex', age: 15},
-      {name: 'Anna', age: 13}]})
+    this.setState({
+      persons:
+        [{ name: newName, age: 43 },
+        { name: 'Pavel', age: 43 },
+        { name: 'Alex', age: 15 },
+        { name: 'Anna', age: 13 }]
+    })
   }
 
 
   nameChangedHandler = (event) => {
-    this.setState({persons: 
-      [{name: 'Marina', age: 43},
-      {name: event.target.value, age: 43},
-      {name: 'Alex', age: 15},
-      {name: 'Anna', age: 13}]})
+    this.setState({
+      persons:
+        [{ name: 'Marina', age: 43 },
+        { name: event.target.value, age: 43 },
+        { name: 'Alex', age: 15 },
+        { name: 'Anna', age: 13 }]
+    })
   }
+
+  togglerPersonHandler = () => {
+
+    const doesShow = this.state.showPerson;
+    this.setState({ showPerson: !doesShow });
+  };
 
 
 
   render() {
 
-    const styleButton= {
+    const styleButton = {
       background: 'rgb(204, 228, 248)',
       font: 'inherit',
       border: '1px solid blue',
@@ -47,28 +58,33 @@ class App extends Component {
     }
     return (
       <div className="App">
-       <h1>Hi, Marina</h1>
-      <h3> React App</h3>
+        <h1>Hi, Marina</h1>
+        <h3> React App</h3>
 
-      {/* {console.log(this.state)} */}
 
-      <p>This is really working</p>
-      <button style={styleButton} onClick={() =>this.switchNameHandler('Max')}>Switch Name</button>
-      <Person 
-        name={this.state.persons[0].name} 
-        age={this.state.persons[0].age}
-        >My hobby: Racing</Person>
-      <Person 
-        name={this.state.persons[1].name} 
-        age={this.state.persons[1].age}
-        changed={this.nameChangedHandler} />
-      <Person 
-        name={this.state.persons[2].name} 
-        age={this.state.persons[2].age}
-        click={this.switchNameHandler.bind(this, 'Arina')} />
-      <Person 
-        name={this.state.persons[3].name} 
-        age={this.state.persons[3].age} />
+        <p>This is really working</p>
+        <button style={styleButton}
+          onClick={this.togglerPersonHandler}>
+          Switch Name</button>
+        {
+          //use ternary operator  test ? true : false
+          this.state.showPerson ?
+            <div >
+              <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age} >My hobby: Racing</Person>
+              <Person
+                name={this.state.persons[1].name}
+                age={this.state.persons[1].age}
+                changed={this.nameChangedHandler} />
+              <Person
+                name={this.state.persons[2].name}
+                age={this.state.persons[2].age}
+                click={this.switchNameHandler.bind(this, 'Arina')} />
+              <Person
+                name={this.state.persons[3].name}
+                age={this.state.persons[3].age} />
+            </div> : null}
       </div>
     );
   }
