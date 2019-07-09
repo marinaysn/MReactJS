@@ -56,6 +56,29 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+
+    // better method to display content on state change - instead of ternary operator
+    let persons = null;
+
+    if (this.state.showPerson) {
+      persons = <div >
+      <Person
+        name={this.state.persons[0].name}
+        age={this.state.persons[0].age} >My hobby: Racing</Person>
+      <Person
+        name={this.state.persons[1].name}
+        age={this.state.persons[1].age}
+        changed={this.nameChangedHandler} />
+      <Person
+        name={this.state.persons[2].name}
+        age={this.state.persons[2].age}
+        click={this.switchNameHandler.bind(this, 'Arina')} />
+      <Person
+        name={this.state.persons[3].name}
+        age={this.state.persons[3].age} />
+    </div>
+    }
+
     return (
       <div className="App">
         <h1>Hi, Marina</h1>
@@ -66,25 +89,7 @@ class App extends Component {
         <button style={styleButton}
           onClick={this.togglerPersonHandler}>
           Switch Name</button>
-        {
-          //use ternary operator  test ? true : false
-          this.state.showPerson ?
-            <div >
-              <Person
-                name={this.state.persons[0].name}
-                age={this.state.persons[0].age} >My hobby: Racing</Person>
-              <Person
-                name={this.state.persons[1].name}
-                age={this.state.persons[1].age}
-                changed={this.nameChangedHandler} />
-              <Person
-                name={this.state.persons[2].name}
-                age={this.state.persons[2].age}
-                click={this.switchNameHandler.bind(this, 'Arina')} />
-              <Person
-                name={this.state.persons[3].name}
-                age={this.state.persons[3].age} />
-            </div> : null}
+        { persons }
       </div>
     );
   }
