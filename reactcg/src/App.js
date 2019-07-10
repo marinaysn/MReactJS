@@ -65,10 +65,10 @@ class App extends Component {
     }
 
     // better method to display content on state change - instead of ternary operator
-    let persons = null;
+    let personsDisplayArray = null;
 
     if (this.state.showPerson) {
-      persons = (
+      personsDisplayArray = (
         <div>
           {this.state.persons.map((eachPerson, index) =>{
             return <Person 
@@ -93,7 +93,7 @@ class App extends Component {
         <button style={styleButton}
           onClick={this.togglerPersonHandler}>
           Switch Name</button>
-        { persons }
+        { personsDisplayArray }
       </div>
     );
   }
