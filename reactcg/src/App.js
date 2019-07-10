@@ -8,47 +8,51 @@ import Person from './Person/Person'
 class App extends Component {
 
   state = {
-    persons: [{ name: 'Marina', age: 28 },
-    { name: 'Pavel', age: 43 },
-    { name: 'Alex', age: 15 },
-    { name: 'Anna', age: 13 }],
+    persons: [{  id: '1', name: 'Marina', age: 28 },
+    { id: '2',  name: 'Pavel', age: 43 },
+    { id: '3',  name: 'Alex', age: 15 },
+    {  id: '4', name: 'Anna', age: 13 }],
     someOtherState: 'other state',
     showPerson: false
   };
 
 
-
  deletePersonHandler = (personToDelete) =>{
-  // You should always update state in an immutable fashion, so without mutating the original state first.
-  // Create a copy, change that and then update the state with a new state
-  //DO NOT DO THIS:
-  // const personArrWDeleted = this.state.persons
-  //USE THIS INSTEAD
   // const personArrWDeleted = this.state.persons.slice();
-  //OR MORE MODERN APPROACH
   const personArrWDeleted = [...this.state.persons]
    personArrWDeleted.splice(personToDelete, 1);
-   this.setState({persons: personArrWDeleted})
-   
+   this.setState({persons: personArrWDeleted}) 
  }
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
+
+    const pIndex = this.state.persons.findIndex(m => {
+      return m.id === id
+    });
+
+    // from the state array find one record with given id
+    const p = {...this.state.persons[pIndex]};
+    //alternative to above
+    //const p = Object.assign({}, this.state.persons[pIndex]);
+
+    //change its name
+    p.name = event.target.value;
+
+    //get copy of full array
+    const personsArr = [...this.state.persons]
+    //update given person with new person's name
+    personsArr[pIndex] = p
+
+    //update original array
     this.setState({
-      persons:
-        [{ name: 'Marina', age: 43 },
-        { name: event.target.value, age: 43 },
-        { name: 'Alex', age: 15 },
-        { name: 'Anna', age: 13 }]
+      persons: personsArr
     })
   }
 
   togglerPersonHandler = () => {
-
     const doesShow = this.state.showPerson;
     this.setState({ showPerson: !doesShow });
   };
-
-
 
   render() {
 
@@ -69,8 +73,10 @@ class App extends Component {
           {this.state.persons.map((eachPerson, index) =>{
             return <Person 
               click={() => this.deletePersonHandler(index)}
-              name= {eachPerson.name}
-              age={eachPerson.age}
+              name= {eachPerson.name }
+              age={eachPerson.age }
+              key={eachPerson.id }
+              changed={(event) => this.nameChangedHandler(event, eachPerson.id)}
             />
           })}
         </div>
@@ -94,57 +100,4 @@ class App extends Component {
 }
 
 export default App;
-
-
-//  Learning Hooks
-// import React, { useState } from 'react';
-// import './App.css';
-// import Person from './Person/Person'
-
-// const app = props => {
-
-//   const [personState, setPersonState] = useState(
-//     {
-//       persons:
-//         [{ name: 'Marina', age: 28 },
-//         { name: 'Pavel', age: 43 },
-//         { name: 'Alex', age: 15 },
-//         { name: 'Anna', age: 13 }]
-//       //   ,
-//       // someOtherState: 'other state'
-//     }
-//   );
-
-
-//   //const [otherState, setOtherState] = useState(personState.someOtherState);
-//   const [otherState, setOtherState] = useState("some Other State");
-
-//   //console.log(personState, otherState);
-
-//   const switchNameHandler = () => {
-//     setPersonState({
-//       persons:
-//         [{ name: 'Marinka', age: 23 },
-//         { name: 'Paul', age: 33 },
-//         { name: 'Jane', age: 15 },
-//         { name: 'Sasha', age: 13 }]
-//     })
-//   };
-
-//   return (
-//     <div className="App">
-//       <h1>Hi, Marina</h1>
-//       <h3> React App</h3>
-// {console.log(personState, otherState)}
-//       <p>This is really working</p>
-//       <button onClick={switchNameHandler}>Switch Name</button>
-//       <Person name={personState.persons[0].name} age={personState.persons[0].age}>My hobby: Racing</Person>
-//       <Person name={personState.persons[1].name} age={personState.persons[1].age} />
-//       <Person name={personState.persons[2].name} age={personState.persons[2].age} />
-//       <Person name={personState.persons[3].name} age={personState.persons[3].age} />
-//     </div>
-//   );
-// }
-
-// export default app;
 
