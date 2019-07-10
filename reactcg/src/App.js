@@ -19,13 +19,18 @@ class App extends Component {
 
 
  deletePersonHandler = (personToDelete) =>{
+  // You should always update state in an immutable fashion, so without mutating the original state first.
+  // Create a copy, change that and then update the state with a new state
+  //DO NOT DO THIS:
+  // const personArrWDeleted = this.state.persons
+  //USE THIS INSTEAD
   // const personArrWDeleted = this.state.persons.slice();
+  //OR MORE MODERN APPROACH
   const personArrWDeleted = [...this.state.persons]
    personArrWDeleted.splice(personToDelete, 1);
    this.setState({persons: personArrWDeleted})
    
  }
-
 
   nameChangedHandler = (event) => {
     this.setState({
