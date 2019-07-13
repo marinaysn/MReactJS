@@ -3,7 +3,8 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import Radium from 'radium'
 
 import Person from './Person/Person'
 
@@ -64,7 +65,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        background: 'lightgreen',
+        color: 'dark blue'
+      }
     }
 
     // better method to display content on state change - instead of ternary operator
@@ -85,6 +90,10 @@ class App extends Component {
         </div>
       )
       styleButton.background = 'red';
+      styleButton[':hover'] = {
+        background: 'coral',
+        color: 'darkblue'
+      }
     }
 
     let switchParagraphs = [];
@@ -123,5 +132,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
 
