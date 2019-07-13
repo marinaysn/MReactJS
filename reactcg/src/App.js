@@ -4,7 +4,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-import Radium, { StyleRoot } from "radium";
+// import Radium, { StyleRoot } from "radium";
 
 import Person from "./Person/Person";
 
@@ -111,7 +111,7 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
+      // <StyleRoot>
         <div className="App">
           <h1>Hi, Marina</h1>
           <h3 className="bg-secondary w-50 d-inline-block py-3"> React App</h3>
@@ -123,9 +123,10 @@ class App extends Component {
           </button>
           {personsDisplayArray}
         </div>
-      </StyleRoot>
+      // </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+//export default Radium(App);
+export default App;
