@@ -3,6 +3,8 @@
 
 import React, { Component } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
+
 import Person from './Person/Person'
 
 class App extends Component {
@@ -57,7 +59,8 @@ class App extends Component {
   render() {
 
     const styleButton = {
-      background: 'rgb(204, 228, 248)',
+      background: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -81,15 +84,36 @@ class App extends Component {
           })}
         </div>
       )
+      styleButton.background = 'red';
     }
+
+    let switchParagraphs = [];
+    //['red', 'bold'].join(' ');
+
+    if (this.state.persons.length > 3){
+      switchParagraphs.push('red') ;
+      switchParagraphs.push('bold') ;
+      switchParagraphs = switchParagraphs.join(' ');
+    }
+    else if (this.state.persons.length <= 3 && this.state.persons.length > 0){
+      switchParagraphs = [];
+      switchParagraphs.push('bold') ;
+      
+    }
+    else {
+      switchParagraphs = [];
+    }
+    
 
     return (
       <div className="App">
         <h1>Hi, Marina</h1>
-        <h3> React App</h3>
+        <h3 className="bg-secondary w-50 d-inline-block py-3"> React App</h3>
 
 
-        <p>This is really working</p>
+        <p className={switchParagraphs}>This is really working</p>
+
+
         <button style={styleButton}
           onClick={this.togglerPersonHandler}>
           Switch Name</button>
