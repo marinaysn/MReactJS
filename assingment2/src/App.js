@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import ValidationComponent from './ValidationComponent/ValidationComponent'
-
+import 'bootstrap/dist/css/bootstrap.css'
 import CharComponent from './CharComponent/CharComponent'
 export class App extends Component {
 
@@ -37,8 +37,8 @@ export class App extends Component {
 
     return (
 
-      <div className="App">
-        <div className="float-left">
+      <div className="App ">
+        <div className="float-left bg-secondary p-3 m-2">
           <input type="text" onChange={this.inputAppHandler} value={this.state.inputArray} />
 
           <p>{this.state.inputArray.length}</p>
