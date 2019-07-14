@@ -3,11 +3,7 @@ import './Person.css';
 
 const person = (props) => {
 
-    const rnd = Math.random();
-
-            if (rnd > 0.7) {
-                throw new Error('Error occurs. Please check the code and try again!!! TBA');
-            }
+    
 
     return (      
         <div className="Person">
