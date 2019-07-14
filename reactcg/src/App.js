@@ -2,9 +2,7 @@
 // uncomment functional aproach below
 
 import React, { Component } from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
-// import Radium, { StyleRoot } from "radium";
+import cls from "./App.css";
 
 import Person from "./Person/Person";
 
@@ -63,14 +61,9 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        background: "lightgreen",
-        color: "dark blue"
-      }
+      cursor: "pointer"
     };
 
-    // better method to display content on state change - instead of ternary operator
     let personsDisplayArray = null;
 
     if (this.state.showPerson) {
@@ -90,29 +83,25 @@ class App extends Component {
         </div>
       );
       styleButton.background = "red";
-      styleButton[":hover"] = {
-        background: "coral",
-        color: "darkblue"
-      };
     }
 
     let switchParagraphs = [];
     // let switchParagraphs = ['red', 'bold'].join(' ');
 
     if (this.state.persons.length > 3) {
-      switchParagraphs.push("red");
-      switchParagraphs.push("bold");
+      switchParagraphs.push(cls.red);
+      switchParagraphs.push(cls.bold);
       switchParagraphs = switchParagraphs.join(" ");
     } else if (
       this.state.persons.length <= 3 &&
       this.state.persons.length > 0
     ) {
-      switchParagraphs.push("bold");
+      switchParagraphs.push(cls.bold);
     }
 
     return (
-      // <StyleRoot>
-        <div className="App">
+
+        <div className={cls.App}>
           <h1>Hi, Marina</h1>
           <h3 className="bg-secondary w-50 d-inline-block py-3"> React App</h3>
 
@@ -123,10 +112,9 @@ class App extends Component {
           </button>
           {personsDisplayArray}
         </div>
-      // </StyleRoot>
+
     );
   }
 }
 
-//export default Radium(App);
 export default App;
