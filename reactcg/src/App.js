@@ -3,9 +3,8 @@
 
 import React, { Component } from "react";
 import cls from "./App.css";
-
 import Person from "./Person/Person";
-
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 class App extends Component {
   state = {
     persons: [
@@ -71,13 +70,16 @@ class App extends Component {
         <div>
           {this.state.persons.map((eachPerson, index) => {
             return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={eachPerson.name}
-                age={eachPerson.age}
+              <ErrorBoundary> 
                 key={eachPerson.id}
-                changed={event => this.nameChangedHandler(event, eachPerson.id)}
-              />
+                <Person
+                  click={() => this.deletePersonHandler(index)}
+                  name={eachPerson.name}
+                  age={eachPerson.age}
+                 
+                  changed={event => this.nameChangedHandler(event, eachPerson.id)}
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
@@ -101,17 +103,17 @@ class App extends Component {
 
     return (
 
-        <div className={cls.App}>
-          <h1>Hi, Marina</h1>
-          <h3 className="bg-secondary w-50 d-inline-block py-3"> React App</h3>
+      <div className={cls.App}>
+        <h1>Hi, Marina</h1>
+        <h3 className="bg-secondary w-50 d-inline-block py-3"> React App</h3>
 
-          <p className={switchParagraphs}>This is really working</p>
+        <p className={switchParagraphs}>This is really working</p>
 
-          <button style={styleButton} onClick={this.togglerPersonHandler}>
-            Switch Name
+        <button style={styleButton} onClick={this.togglerPersonHandler}>
+          Switch Name
           </button>
-          {personsDisplayArray}
-        </div>
+        {personsDisplayArray}
+      </div>
 
     );
   }
