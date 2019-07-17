@@ -4,6 +4,8 @@ import classes2 from './Cockpit.css'
 
 const Cockpit = (props) => {
 
+  console.log('Cockpit.js  called')
+
   let status = props.appStatus
 
   let btnClass = '';
@@ -26,6 +28,7 @@ const Cockpit = (props) => {
   }
 
   return (
+    
     <div className={classes2.Cockpit}>
       <h1>{props.title} App</h1>
       <p className={assignedClasses.join(' ')}> status: {status}</p>
