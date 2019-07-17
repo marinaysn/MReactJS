@@ -1,19 +1,63 @@
-import React from 'react'
+// import React from 'react'
+// import Person from '../Person/Person'
+
+// const PersonList = (props) => {
+//     console.log('PersonList.js  called');
+
+//     return props.persons.map((person, index) => {
+
+//         return (<Person
+//             click={() => props.clicked(index)}
+//             name={person.name}
+//             age={person.age}
+//             key={person.id}
+//             changed={(event) => props.changed(event, person.id)} />);
+//     });
+// };
+
+
+// export default PersonList
+
+
+import React, { Component } from 'react'
 import Person from '../Person/Person'
 
-const PersonList = (props) => {
-    console.log('PersonList.js  called');
+export class PersonList extends Component {
 
-    return props.persons.map((person, index) => {
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     console.log('PersonList.js 1  getDerivedStateFromProps called', nextProps);
+    //     return prevState
+    // }
 
-        return (<Person
-            click={() => props.clicked(index)}
-            name={person.name}
-            age={person.age}
-            key={person.id}
-            changed={(event) => props.changed(event, person.id)} />);
-    });
-};
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('PersonList.js 2 shouldComponentUpdate called', nextProps);
+        return true;
+    }
 
+    getSnapshotBeforeUpdate(prev, prevState){
+        console.log('PersonList.js 3 getSnapshotBeforeUpdate called', prev);
+        return null;
+    }
+
+    componentDidUpdate(){
+        console.log('PersonList.js 4 componentDidUpdate called');  
+    }
+    
+    render() {
+
+        console.log('PersonList.js render called');
+
+        return this.props.persons.map((person, index) => {
+
+            return (<Person
+                click={() => this.props.clicked(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={(event) => this.props.changed(event, person.id)} />);
+        });
+    }
+}
 
 export default PersonList
+
