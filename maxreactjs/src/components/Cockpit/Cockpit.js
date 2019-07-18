@@ -18,7 +18,7 @@ const Cockpit = (props) => {
     console.log("cockpit useEffect 3 in functions");
     // Http request
     setTimeout(() => {
-      alert('Run first time only');
+     // alert('Run first time only');
     },1000);
     return () =>{
       console.log('cockpit useEffect 1-1. Cleanup in useEffect')

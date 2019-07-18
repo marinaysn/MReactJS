@@ -16,15 +16,16 @@
 
 // export default person;
 
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import classes from './Person.css';
 import Auxiliary from "../../hoc/Auxiliary"
+ import withClass from "../../hoc/withClass"
 
 export class Person extends Component {
     render() {
         console.log('Person.js  called')
         return (
-
+            //instead of wrapping div use hoc element
             // <div className={classes.Person}>
             <Auxiliary>
             
@@ -40,4 +41,4 @@ export class Person extends Component {
     }
 }
 
-export default Person
+export default withClass(Person, classes.Person);
