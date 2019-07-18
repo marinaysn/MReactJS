@@ -4,17 +4,6 @@ import classes2 from './Cockpit.css'
 
 const Cockpit = (props) => {
 
-  // useEffect(() => {
-  //   console.log("cockpit useEffect 1 in functions");
-  //   // Http request
-  //   setTimeout(() => {
-  //     alert('Persons array changed');
-  //   },1000);
-  //   return () =>{
-  //     console.log('cockpit useEffect 1-1. Cleanup in eseEffect')
-  //   }
-  // }, [props.persons]);
-
   // //use useEffect instanses as many as you need.
   // useEffect(() => {
   //   console.log("cockpit useEffect 2  in functions");
@@ -53,15 +42,15 @@ const Cockpit = (props) => {
 
   let btnClass = '';
   const assignedClasses = [];
-  if (props.persons.length <= 2) {
+  if (props.personsLength<= 2) {
     assignedClasses.push(classes2.red); // classes = ['red']
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignedClasses.push(classes2.bold); // classes = ['red', 'bold']
     status = status + " - danger low!!!";
   }
 
-  if (props.persons.length <= 0) {
+  if (props.personsLength <= 0) {
     assignedClasses.push(classes2.bold); // classes = ['red', 'bold']
     status = "offline - nothing to show";
   }
@@ -82,7 +71,7 @@ const Cockpit = (props) => {
   )
 }
 
-export default Cockpit
+export default React.memo(Cockpit);
 
 
 // import React, { Component } from 'react'
