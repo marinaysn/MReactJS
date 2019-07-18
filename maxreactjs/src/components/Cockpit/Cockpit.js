@@ -9,7 +9,10 @@ const Cockpit = (props) => {
     // Http request
     setTimeout(() => {
       alert('Persons array changed');
-    },1000)
+    },1000);
+    return () =>{
+      console.log('cockpit useEffect 1-1. Cleanup in eseEffect')
+    }
   }, [props.persons]);
 
   //use useEffect instanses as many as you need.

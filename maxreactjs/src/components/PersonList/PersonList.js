@@ -42,6 +42,9 @@ export class PersonList extends Component {
     componentDidUpdate(){
         console.log('PersonList.js 4 componentDidUpdate called');  
     }
+    componentWillUnmount(){
+        console.log('Personslist componentWillUnmount ')
+    }
     
     render() {
 
