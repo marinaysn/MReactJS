@@ -32,3 +32,12 @@
   background-color: salmon;
   color: black;
 }
+
+.App button.Del {
+  background-color: salmon;
+}
+
+.App button.Del:hover {
+  background-color: rgb(159, 247, 45);
+  color: black;
+}
