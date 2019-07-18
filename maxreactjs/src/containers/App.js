@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import PersonList from '../components/PersonList/PersonList';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+
 
 class App extends Component {
 
@@ -88,25 +90,25 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <WithClass cls={classes.App}>
 
-      {/* <button className={classes.Del} onClick={() => { this.setState({showCockpit: false})} }
+        {/* <button className={classes.Del} onClick={() => { this.setState({showCockpit: false})} }
       >Remove Cockpit</button> */}
 
-<button className={classes.Del} onClick={() => { this.setState({showCockpit: !this.state.showCockpit})} }>Remove Cockpit</button>
+        <button className={classes.Del} onClick={() => { this.setState({ showCockpit: !this.state.showCockpit }) }}>Remove Cockpit</button>
 
 
 
-      {this.state.showCockpit ? <Cockpit
-        title={this.props.appTitle}
-        appStatus={this.props.appStatus}
-        personsLength={this.state.persons.length}
-        click={this.togglePersonsHandler}
-        showPerson={this.state.showPersons}
-      /> : null }
-      
-        { persons }
-      </div >
+        {this.state.showCockpit ? <Cockpit
+          title={this.props.appTitle}
+          appStatus={this.props.appStatus}
+          personsLength={this.state.persons.length}
+          click={this.togglePersonsHandler}
+          showPerson={this.state.showPersons}
+        /> : null}
+
+        {persons}
+      </WithClass>
     );
 
   }
