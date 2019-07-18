@@ -24,15 +24,6 @@ class App extends Component {
     showPersons: false
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("App.js: getDerivedStateFromProps is called", nextProps);
-    return prevState;
-  }
-
-  componentWillMount(){
-    console.log("App.js: componentWillMount is called");
-  }
-
   componentDidMount() {
     console.log("App.js: componentDidMount is called");
   }

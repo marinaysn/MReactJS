@@ -5,8 +5,29 @@ import classes2 from './Cockpit.css'
 const Cockpit = (props) => {
 
   useEffect(() => {
-    console.log("cockpit useEffect in functions");
-  });
+    console.log("cockpit useEffect 1 in functions");
+    // Http request
+    setTimeout(() => {
+      alert('Persons array changed');
+    },1000)
+  }, [props.persons]);
+
+  //use useEffect instanses as many as you need.
+  useEffect(() => {
+    console.log("cockpit useEffect 2  in functions");
+    // Http request
+    setTimeout(() => {
+      alert('Title is changed');
+    },1000)
+  }, [props.title]);
+
+  useEffect(() => {
+    console.log("cockpit useEffect 3 in functions");
+    // Http request
+    setTimeout(() => {
+      alert('Run first time only');
+    },1000)
+  }, []);
 
   console.log('Cockpit.js  called')
 
