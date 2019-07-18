@@ -31,7 +31,11 @@ export class PersonList extends Component {
 
     shouldComponentUpdate(nextProps, nextState){
         console.log('PersonList.js 2 shouldComponentUpdate called', nextProps);
-        return true;
+        if (nextProps.persons !== this.props.persons){
+            return true
+        }
+
+        return false;
     }
 
     getSnapshotBeforeUpdate(prev, prevState){

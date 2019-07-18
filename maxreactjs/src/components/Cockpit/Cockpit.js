@@ -4,33 +4,48 @@ import classes2 from './Cockpit.css'
 
 const Cockpit = (props) => {
 
-  useEffect(() => {
-    console.log("cockpit useEffect 1 in functions");
-    // Http request
-    setTimeout(() => {
-      alert('Persons array changed');
-    },1000);
-    return () =>{
-      console.log('cockpit useEffect 1-1. Cleanup in eseEffect')
-    }
-  }, [props.persons]);
+  // useEffect(() => {
+  //   console.log("cockpit useEffect 1 in functions");
+  //   // Http request
+  //   setTimeout(() => {
+  //     alert('Persons array changed');
+  //   },1000);
+  //   return () =>{
+  //     console.log('cockpit useEffect 1-1. Cleanup in eseEffect')
+  //   }
+  // }, [props.persons]);
 
-  //use useEffect instanses as many as you need.
-  useEffect(() => {
-    console.log("cockpit useEffect 2  in functions");
-    // Http request
-    setTimeout(() => {
-      alert('Title is changed');
-    },1000)
-  }, [props.title]);
+  // //use useEffect instanses as many as you need.
+  // useEffect(() => {
+  //   console.log("cockpit useEffect 2  in functions");
+  //   // Http request
+  //   setTimeout(() => {
+  //     alert('Title is changed');
+  //   },1000)
+  // }, [props.title]);
 
+  //will run only first time it randers and return when unmount the element
   useEffect(() => {
     console.log("cockpit useEffect 3 in functions");
     // Http request
     setTimeout(() => {
       alert('Run first time only');
-    },1000)
+    },1000);
+    return () =>{
+      console.log('cockpit useEffect 1-1. Cleanup in useEffect')
+    }
   }, []);
+
+  //runs on every update cycle because it has not second agrument
+  useEffect(() => {
+    console.log("cockpit useEffect 2nd in functions");
+  
+    return () =>{
+      console.log('cockpit useEffect 2. Cleanup in  2nd useEffect')
+    }
+  });
+
+
 
   console.log('Cockpit.js  called')
 

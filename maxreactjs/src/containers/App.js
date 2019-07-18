@@ -5,7 +5,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     console.log('App.js constructor called', this.props)
   }
@@ -21,22 +21,23 @@ class App extends Component {
       // { id: "8", name: "Alice", age: 4 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
 
   componentDidMount() {
     console.log("App.js: componentDidMount is called");
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     console.log("App.js: componentDidUpdate is called");
     return true;
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log("App.js: componentDidUpdate is called");
   }
-  
+
 
 
   nameChangedHandler = (event, id) => {
@@ -72,7 +73,7 @@ class App extends Component {
 
     console.log('App.js rander called')
     let persons = null;
- 
+
 
     if (this.state.showPersons) {
       persons = (
@@ -81,26 +82,33 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}
-          />      
+          />
         </div>
-      ); 
+      );
     }
 
     return (
       <div className={classes.App}>
 
-        <Cockpit
-          title={this.props.appTitle}
-          appStatus={this.props.appStatus}
-          persons={this.state.persons}
-          click={this.togglePersonsHandler}
-          showPerson={this.state.showPersons}
-        />
+      <button onClick={() => { this.setState({showCockpit: false})} }
+      >Remove Cockpit</button>
+
+{/* <button onClick={() => { this.setState({showCockpit: !this.state.showCockpit})} }>Remove Cockpit</button> */}
+
+
+
+      {this.state.showCockpit ? <Cockpit
+        title={this.props.appTitle}
+        appStatus={this.props.appStatus}
+        persons={this.state.persons}
+        click={this.togglePersonsHandler}
+        showPerson={this.state.showPersons}
+      /> : null }
       
-        {persons}
-      </div>
+        { persons }
+      </div >
     );
-   
+
   }
 }
 
