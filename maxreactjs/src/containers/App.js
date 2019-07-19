@@ -15,7 +15,7 @@ class App extends Component {
   state = {
     persons: [
       { id: "1", name: "Marina", age: 28 },
-      { id: "2", name: "Pavel", age: '43' },
+      { id: "2", name: "Pavel", age: 43 },
       { id: "3", name: "Alex", age: 15 },
       { id: "4", name: "Anna", age: 13 },
       { id: "5", name: "Jane", age: 37 },
@@ -45,6 +45,7 @@ class App extends Component {
 
 
   nameChangedHandler = (event, id) => {
+    
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
