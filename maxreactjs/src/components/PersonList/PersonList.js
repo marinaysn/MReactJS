@@ -3,15 +3,6 @@ import Person from '../Person/Person'
 
 export class PersonList extends PureComponent {
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log('PersonList.js 2 shouldComponentUpdate called', nextProps);
-    //     if (nextProps.persons !== this.props.persons || 
-    //         nextProps.changed !== this.props.changed || 
-    //         nextProps.clicked !== this.props.clicked) {
-    //         return true
-    //     }
-    //     return false;
-    // }
 
     getSnapshotBeforeUpdate(prev, prevState) {
         console.log('PersonList.js 3 getSnapshotBeforeUpdate called', prev);
