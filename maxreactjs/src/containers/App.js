@@ -4,6 +4,7 @@ import PersonList from '../components/PersonList/PersonList';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Auxiliary from '../hoc/Auxiliary';
+import AuthContext from '../context/auth-context'
 
 
 class App extends Component {
@@ -46,7 +47,7 @@ class App extends Component {
 
 
   nameChangedHandler = (event, id) => {
-    
+
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
@@ -60,12 +61,13 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-   // this.setState({ persons: persons });
+    // this.setState({ persons: persons });
     this.setState((prevState, props) => {
 
-      return{ 
+      return {
         persons: persons,
-        changeCounter: prevState.changeCounter + 1 };
+        changeCounter: prevState.changeCounter + 1
+      };
 
     });
 
@@ -84,8 +86,8 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
-  authenticateLoginHandler = () =>{
-    this.setState({authenticated : true });
+  authenticateLoginHandler = () => {
+    this.setState({ authenticated: true });
   };
 
   render() {
@@ -101,7 +103,6 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}
-            isAuthenticated={this.state.authenticated}
           />
         </div>
       );
@@ -115,16 +116,24 @@ class App extends Component {
 
         <button className={classes.Del} onClick={() => { this.setState({ showCockpit: !this.state.showCockpit }) }}>Remove Cockpit</button>
 
-        {this.state.showCockpit ? <Cockpit
-          title={this.props.appTitle}
-          appStatus={this.props.appStatus}
-          personsLength={this.state.persons.length}
-          click={this.togglePersonsHandler}
-          showPerson={this.state.showPersons}
-          login= {this.authenticateLoginHandler}
-        /> : null}
+        <AuthContext.Provider value={
+          {
+            authernticated: this.state.authenticated, 
+            login: this.authenticateLoginHandler}
+          }>
 
-        {persons}
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              appStatus={this.props.appStatus}
+              personsLength={this.state.persons.length}
+              click={this.togglePersonsHandler}
+              showPerson={this.state.showPersons}
+            />
+          ) : null}
+          {persons}
+
+        </AuthContext.Provider>
       </Auxiliary>
     );
 
