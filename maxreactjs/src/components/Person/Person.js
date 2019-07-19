@@ -13,9 +13,12 @@ export class Person extends Component {
         this.inputElementref = React.createRef();
     }
 
+    static contextType = AuthContext;
+
     componentDidMount() {
         // this.inputElement.focus();
         this.inputElementref.current.focus();
+        console.log('marina: ' + this.context.authernticated);
     }
 
     render() {
@@ -24,10 +27,14 @@ export class Person extends Component {
             //instead of wrapping div use hoc element
             // <div className={classes.Person}>
             <Auxiliary>
-                <AuthContext.Consumer>
+
+                {/* <AuthContext.Consumer>
                     {(context) =>  context.authernticated ? <p>Authenticated</p> : <p>Please Log In</p> 
                     }
-                </AuthContext.Consumer>
+                </AuthContext.Consumer> */}
+
+          {  this.context.authernticated ? <p>Authenticated</p> : <p>Please Log In</p>
+}
 
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
