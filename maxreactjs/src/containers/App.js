@@ -26,7 +26,8 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   }
 
   componentDidMount() {
@@ -83,6 +84,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
+  authenticateLoginHandler = () =>{
+    this.setState({authenticated : true });
+  };
+
   render() {
 
     console.log('App.js rander called')
@@ -96,6 +101,7 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}
+            isAuthenticated={this.state.authenticated}
           />
         </div>
       );
@@ -115,6 +121,7 @@ class App extends Component {
           personsLength={this.state.persons.length}
           click={this.togglePersonsHandler}
           showPerson={this.state.showPersons}
+          login= {this.authenticateLoginHandler}
         /> : null}
 
         {persons}

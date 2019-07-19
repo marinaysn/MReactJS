@@ -32,7 +32,6 @@ export class Person extends Component {
 
     componentDidMount() {
         // this.inputElement.focus();
-
         this.inputElementref.current.focus();
     }
 
@@ -42,7 +41,7 @@ export class Person extends Component {
             //instead of wrapping div use hoc element
             // <div className={classes.Person}>
             <Auxiliary>
-            
+            {this.props.isAuth ? <p>Authenticated</p> : <p>Please Log In</p>}
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 
