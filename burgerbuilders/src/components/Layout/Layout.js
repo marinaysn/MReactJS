@@ -1,6 +1,6 @@
 import React from 'react';
-import cls from './layout.module.css'
-import Auxiliary from '../../hoc/Auxiliary'
+import cls from './layout.module.css';
+import Auxiliary from '../../hoc/Auxiliary';
 
 
 
@@ -18,4 +18,4 @@ const layout = (props) => {
     )
 }
 
-export default layout
+export default layout;
