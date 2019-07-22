@@ -1,6 +1,7 @@
 import React from 'react';
 import cls from './burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import BuildControls from '../Burger/BuildControls/BuildControls'
 
 const Burger = (props) => {
 
@@ -52,6 +53,8 @@ if (locIngredients.length === 0) {
            {locIngredients}
 
             <BurgerIngredient iType='BreadBottom' />
+
+            <BuildControls />
         </div>
     )
 }

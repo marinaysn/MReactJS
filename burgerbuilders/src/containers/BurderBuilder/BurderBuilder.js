@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Auxiliary from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BurgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
-
+import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 
 export class BurderBuilder extends Component {
 
@@ -30,6 +30,8 @@ export class BurderBuilder extends Component {
             <Auxiliary>
                 <Burger ingredients = {this.state.ingredients} />
                 <BurgerIngredient />
+
+                <BuildControls />
             </Auxiliary>
         )
     }
