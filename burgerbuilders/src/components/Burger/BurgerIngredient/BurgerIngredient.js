@@ -8,11 +8,11 @@ export class BurgerIngredient extends Component {
 
         let ingredient = null;
 
-        // if (!props.type || !(typeof props.type === 'string') || /([A-Z][a-z]+)/g.test(props.type) ) {
-        //     props.type = 'none'
-        // }
+        if (!this.props.iType || !(typeof this.props.iType === 'string')) {
+            ingredient = 'none'
+        }
 
-        switch (this.props.type) {
+        switch (this.props.iType) {
             case ('BreadBottom'):
                 ingredient = <div className={cls.BreadBottom}></div>;
                 break;
@@ -49,7 +49,7 @@ export class BurgerIngredient extends Component {
 
 
 BurgerIngredient.propTypes = {
-    type: PropTypes.string.isRequired
+    iType: PropTypes.string.isRequired
 }
 
 export default BurgerIngredient;
