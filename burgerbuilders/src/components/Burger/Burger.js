@@ -54,7 +54,7 @@ if (locIngredients.length === 0) {
 
             <BurgerIngredient iType='BreadBottom' />
 
-            <BuildControls />
+            {/* <BuildControls /> */}
         </div>
     )
 }

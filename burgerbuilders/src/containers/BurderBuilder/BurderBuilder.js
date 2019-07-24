@@ -32,6 +32,7 @@ export class BurderBuilder extends Component {
                 <BurgerIngredient />
 
                 <BuildControls />
+                
             </Auxiliary>
         )
     }
