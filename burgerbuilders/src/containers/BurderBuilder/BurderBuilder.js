@@ -25,6 +25,19 @@ export class BurderBuilder extends Component {
             Meat: 0
         }
     }
+
+    addIngredientHandler = (iType) => {
+        const oldCount = this.state.ingredients[iType];
+        const updatedCounter = oldCount +1;
+        const updatedIngredients = {...this.state.ingredients};
+        updatedIngredients[iType] = updatedCounter;
+    };
+
+    deleteIngredientHandler = (iType) => {
+
+    }
+
+
     render() {
         return (
             <Auxiliary>
