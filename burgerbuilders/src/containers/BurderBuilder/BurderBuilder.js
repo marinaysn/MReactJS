@@ -4,18 +4,15 @@ import Burger from '../../components/Burger/Burger';
 import BurgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 
+const ING_PRICES = {
+            Salad: 0.5,
+            Bacon: 0.75,
+            Cheese: 0.5,
+            Meat: 1
+}
+
+
 export class BurderBuilder extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = { ingredient: {
-    //         salad: 1,
-    //         bacon: 1,
-    //         cheese: 2,
-    //         meat: 2
-    //     }  };
-    //   }
-
 
     state = {
         ingredients: {
@@ -23,7 +20,8 @@ export class BurderBuilder extends Component {
             Bacon: 0,
             Cheese: 0,
             Meat: 0
-        }
+        },
+        totalPrice: 4
     }
 
     addIngredientHandler = (iType) => {
@@ -31,21 +29,48 @@ export class BurderBuilder extends Component {
         const updatedCounter = oldCount +1;
         const updatedIngredients = {...this.state.ingredients};
         updatedIngredients[iType] = updatedCounter;
+        const extraCost = ING_PRICES[iType]
+        let oldPrice = this.state.totalPrice;
+        let newPrice = oldPrice + extraCost;
+
+        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
     };
 
     deleteIngredientHandler = (iType) => {
+        const oldCount = this.state.ingredients[iType];
+        const updatedCounter = oldCount <= 0 ? 0 : oldCount - 1;
+        const updatedIngredients = {...this.state.ingredients};
+        updatedIngredients[iType] = updatedCounter;
+        const extraCost = ING_PRICES[iType]
+        let oldPrice = this.state.totalPrice;
+        let newPrice = oldPrice - extraCost;
 
+        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients });
     }
 
-
+   
     render() {
+
+        const disableBtn = {...this.state.ingredients};
+
+        for (let i in disableBtn) {
+            disableBtn[i] = disableBtn[i] <= 0
+            
+        };
+
         return (
             <Auxiliary>
                 <Burger ingredients = {this.state.ingredients} />
                 <BurgerIngredient />
 
-                <BuildControls />
+                <BuildControls 
+                ingredientAdded={this.addIngredientHandler}
+                ingredientRemoved={this.deleteIngredientHandler}
+                disabled={disableBtn}
+                cost={this.state.totalPrice}
+                />
                 
+
             </Auxiliary>
         )
     }
