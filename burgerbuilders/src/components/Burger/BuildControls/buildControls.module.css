@@ -8,3 +8,46 @@
     margin: auto;
     padding: 10px 0;
 }
+
+
+.OrderButton {
+    background-color: rgb(53, 218, 67);
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #086e44;
+    color: #248b24;
+    font-family: inherit;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    box-shadow: 2px 2px 2px #966909;
+    margin-top: 10px;
+}
+
+.OrderButton:hover, .OrderButton:active {
+    background-color: rgb(32, 124, 211);
+    border: 1px solid #093a96;
+    color: #b7e2f7;
+}
+
+.OrderButton:disabled {
+    background-color: rgb(244, 245, 187);
+    cursor: not-allowed;
+    border: 1px solid rgb(78, 53, 7);
+    color: #633f0a;
+}
+
+.OrderButton:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+
+@keyframes enable {
+    0% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
