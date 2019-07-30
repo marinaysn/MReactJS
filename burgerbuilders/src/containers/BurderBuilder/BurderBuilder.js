@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Auxiliary from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BurgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls'
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+
 
 const ING_PRICES = {
             Salad: 0.5,
@@ -22,7 +25,12 @@ export class BurderBuilder extends Component {
             Meat: 0
         },
         totalPrice: 4,
-        purchasable : false
+        purchasable : false,
+        orderBtnClicked: false
+    }
+
+    orderBtnClickedHandler = () => {
+        this.setState({ orderBtnClicked : true });
     }
 
     updatePurchase = (updatedIngredients) => {
@@ -77,15 +85,23 @@ export class BurderBuilder extends Component {
 
         return (
             <Auxiliary>
+                <Modal show={this.state.orderBtnClicked}>
+                <OrderSummary 
+                    itemsOrdered = {this.state.ingredients}
+                />
+                </Modal>
+
                 <Burger ingredients = {this.state.ingredients} />
                 <BurgerIngredient />
-
+               
+                
                 <BuildControls 
                 ingredientAdded={this.addIngredientHandler}
                 ingredientRemoved={this.deleteIngredientHandler}
                 disabled={disableBtn}
                 cost={this.state.totalPrice}
                 ableToPurchase={this.state.purchasable}
+                orderBtnClicked={this.orderBtnClickedHandler}
                 />
                 
 
