@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FaAlignRight } from 'react-icons/fa';
-import logo from "../imagesFl/logo.svg";
+import logo from "../images/logo.svg";
 import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
