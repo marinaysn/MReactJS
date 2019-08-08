@@ -250,11 +250,12 @@ h6 {
   grid-row-gap: 2rem;
   grid-column-gap: 50px;
 }
-.service span {
+.services span {
   display: inline-block;
   color: var(--primaryColor);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
+
 }
 .services h6 {
   letter-spacing: var(--mainSpacing);
