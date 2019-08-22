@@ -12,13 +12,13 @@ export default class FeaturedRooms extends Component {
         // const {name, greeting} = this.context;
        let { loading, featuredRooms : rooms} = this.context;
        
-       rooms = rooms.map(r => {
-           return <Room key={r.id} room={r} />
+       rooms = rooms.map(room => {
+           return <Room key={room.id} room={room} />
        })
       // console.log("price2 " + rooms[0].price);
         return (
             <section className="featured-rooms">
-                <Title title='Featured Rooms'></Title>
+                <Title title='featured rooms'></Title>
                 <div className="featured-rooms-center">
                     { loading ? <Loading /> : rooms }
                 </div>
