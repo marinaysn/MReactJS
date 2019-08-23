@@ -4,10 +4,9 @@ import Hero from '../components/Hero';
 import Banner from '../components/Banner';
 import { Link } from 'react-router-dom';
 import { RoomContext } from '../context';
-
+import StyledHero from "../components/StylesHero";
 
 export default class SingleRoom extends Component {
-
     constructor(props) {
         super(props)
         //  console.log("bobbbbyyy" + this.props);
@@ -30,20 +29,62 @@ export default class SingleRoom extends Component {
 
         if (!room) {
             return (
-            <div className="error">
-                <h3>no such room could be found...</h3>
-                <Link to="/rooms" className="btn-primary">back to rooms</Link>
-            </div>
+                <div className="error">
+                    <h3>no such room could be found...</h3>
+                    <Link to="/rooms" className="btn-primary">back to rooms</Link>
+                </div>
             );
         }
 
-        const {name,description, capacity, size, price, extras, breakfast, pets, images} = room;
+        const { name, 
+            description, 
+            capacity, 
+            size, 
+            price, 
+            extras, 
+            breakfast, 
+            pets, 
+            images } = room;
+
+            const[mainImage, ...defaultImg] = images;
+
         return (
-           <Hero hero='roomsHero'>
-               <Banner title={`${name} room`}>
-                   <Link to='/rooms' className="btn-primary">back to rooms</Link>
-                   </Banner>
-           </Hero>
+            <>
+            <StyledHero img={mainImage || this.state.defaultBCG}>
+                <Banner title={`${name} room`}>
+                    <Link to='/rooms' className="btn-primary">back to rooms</Link>
+                </Banner>
+            </StyledHero>
+
+            <section className="single-room">
+             <div className="single-room-images">
+                 {images.map((item, index) =>{
+                   return  <img key={index} src={item} alt={name} />
+                 })}
+             </div>
+                 <div className="single-room-info">
+                     <article className="desc">
+                      <h3>Details:</h3> 
+                      <p>{description}</p> 
+                     </article>
+
+                     <article className="info">
+                     <h3>Info:</h3> 
+                      <h6>Price: ${price}</h6> 
+                      <h6>Size: {size} Sqft</h6>
+                      <h6>Max Capacity: {capacity}</h6> 
+                      <h6>{pets}</h6> 
+                     </article>
+
+                     <article className="info">
+                     <h3>Extras:</h3> 
+                      <p>{extras}</p> 
+                     </article>
+
+                
+                 </div>
+            </section>
+            </>
         )
     }
 }
