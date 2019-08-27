@@ -14,17 +14,17 @@ export default function RoomsFilter() {
 
     const context = useContext(RoomContext);
 
-    const { rooms, handleChange, type, capacity, price, minPrice, maxPrice,
-        minSize, maxSize, breakfast, pets } = context;
+    const { rooms, handleChange, type, capacity, price, minPrice, maxPrice, minSize, maxSize, breakfast, pets } = context;
 
     //get unique types
     let types = getUnique(rooms, 'type');
-        //add all
+    
+    //add all
     types = ['all', ...types];
 
     //map to jsx
-        types = types.map( (i,idx)=>{
-            return <option value={i} key={idx}>{i}</option>
+    types = types.map( (i,index)=>{
+            return <option value={i} key={index}>{i}</option>
         });
 
 
@@ -32,16 +32,20 @@ export default function RoomsFilter() {
     return (
         <section className="filter-container">
 
-            <Title title="search-rooms" />
+            <Title title="Quick Rooms Search" />
 
             <form className="filter-form">
                 {/* Select Type*/}
                 <div className="form-group">
                     <label htmlFor="type">Room Type</label>
-                    <select name="type" id="type" value={type} className="form-control"
-                        onChange={handleChange}>
+                    <select 
+                        name="type" 
+                        id="type" 
+                        value={type} 
+                        className="form-control"
+                        onChange={handleChange}
+                    >
                         {types}
-
                     </select>
                 </div>
                 {/* end of Select Type */}
