@@ -15,7 +15,7 @@ class RoomProvider extends Component {
         price: 0,
         minPrice: 0,
         maxPrice: 0,
-        minSize:0,
+        minSize: 0,
         maxSize: 0,
         breakfast: false,
         pets: false
@@ -30,33 +30,33 @@ class RoomProvider extends Component {
         let maxPr = Math.max(...rooms.map(i => i.price));
         let maxS = Math.max(...rooms.map(i => i.size));
 
-        this.setState({ 
-            rooms,  
-            featuredRooms, 
+        this.setState({
+            rooms,
+            featuredRooms,
             sortedRooms: rooms,
             loading: false,
             price: maxPr,
             maxPrice: maxPr,
-            maxSize: maxS  
-         });
+            maxSize: maxS
+        });
     }
 
 
     getRoom = (slug) => {
-        let tempRooms =[...this.state.rooms];
+        let tempRooms = [...this.state.rooms];
         const room = tempRooms.find((r) => r.slug === slug);
         return room;
     }
 
-    handleChange = event =>{
+    handleChange = event => {
 
         const type = event.target.type;
-        
+
         const target = event.target;
-        const value = event.type === 'checkbox' ? target.checked: target.value;
+        const value = event.type === 'checkbox' ? target.checked : target.value;
         const name = event.target.name;
         this.setState({
-            [name]:value
+            [name]: value
         }, this.filterRooms)
 
         console.log(type);
@@ -64,8 +64,19 @@ class RoomProvider extends Component {
         console.log(value);
     }
 
-    filterRooms = () =>{
+    filterRooms = () => {
         console.log("Hello Filter Rooms! Mar Mar mmmmmmmmmmmm")
+        let {
+            rooms, type, capacity, price, minSize, maxPrice,
+            breakfast, pets
+        } = this.state;
+        let tempRooms = [...rooms];
+        if (type !=='all'){
+            tempRooms = tempRooms.filter(r => r.type === type) 
+        }
+        this.setState({
+            sortedRooms: tempRooms
+        })
     }
 
 
@@ -79,7 +90,7 @@ class RoomProvider extends Component {
             //let room = {...item.fields,images:images,id}
             //alternatie way:
             // since images are part of field in the data we just overwritting with out new array off images. According to new ES6 instead of images: images, we will just write images, id, on the other hand is not part of field in the data and must be added:
-            let room = {...item.fields,images,id}
+            let room = { ...item.fields, images, id }
 
             return room;
         })
@@ -88,11 +99,11 @@ class RoomProvider extends Component {
 
     render() {
         return (
-            <RoomContext.Provider 
-                value={{ 
-                ...this.state, 
-                getRoom: this.getRoom,
-                handleChange: this.handleChange
+            <RoomContext.Provider
+                value={{
+                    ...this.state,
+                    getRoom: this.getRoom,
+                    handleChange: this.handleChange
                 }}>
                 {this.props.children}
             </RoomContext.Provider>
@@ -102,10 +113,10 @@ class RoomProvider extends Component {
 
 const RoomConsumer = RoomContext.Consumer;
 
-export function withRoomConsumer(Component){
-    return function ConsumerWrapper (props) {
+export function withRoomConsumer(Component) {
+    return function ConsumerWrapper(props) {
         return <RoomConsumer>
-            {value => <Component {...props} context ={value} />}
+            {value => <Component {...props} context={value} />}
         </RoomConsumer>
     }
 };
