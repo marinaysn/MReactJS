@@ -26,7 +26,7 @@ class RoomProvider extends Component {
 
     componentDidMount() {
         let rooms = this.formatData(items);
-        rooms = rooms.reverse();
+        rooms = rooms.reverse(); // need to rander all rooms in desc. order
         let featuredRooms = rooms.filter(room => room.featured === true);
         let maxPr = Math.max(...rooms.map(i => i.price));
         let maxS = Math.max(...rooms.map(i => i.size));
@@ -60,7 +60,7 @@ class RoomProvider extends Component {
         const value = event.type === 'checkbox' ? target.checked : target.value;
         const name = event.target.name;
 
-        
+
         //run as callback function filterRooms
         this.setState({
             [name]: value
@@ -69,42 +69,44 @@ class RoomProvider extends Component {
     }
 
     filterRooms = () => {
-        
+
         let {
             rooms, type, capacity, price, minSize, maxPrice,
             breakfast, pets, minPrice
         } = this.state;
-        
+
         //all the rooms
         let tempRooms = [...rooms];
         //transform values for type
-            capacity = parseInt(capacity);
-            price = parseInt(price);
+        capacity = parseInt(capacity);
+        price = parseInt(price);
 
-            //filter by type
-        if (type !=='all'){
-            tempRooms = tempRooms.filter(r => r.type === type) 
-            
+        //filter by type
+        if (type !== 'all') {
+            tempRooms = tempRooms.filter(r => r.type === type)
+
         }
         //filter by capacity
-        if (capacity !==1){
-            tempRooms = tempRooms.filter(r => r.capacity >=capacity) 
+        if (capacity !== 1) {
+            tempRooms = tempRooms.filter(r => r.capacity >= capacity)
         }
 
-
-        console.log(minPrice)
         //filter by price
-        if (price => minPrice){
-            tempRooms = tempRooms.filter(r => r.price <= price) 
-        }
 
+        tempRooms = tempRooms.filter(r => r.price <= price)
+
+
+        let tempPrice = tempRooms.length > 0 ? Math.min(...tempRooms.map(i => i.price)) : 0;
+
+        console.log('tempPrice: ' + tempPrice)
 
         this.setState({
             sortedRooms: tempRooms,
-            minPrice: Math.min(...tempRooms.map(i => i.price))
+            minPrice: Math.min(...tempRooms.map(i => i.price)),
+
         })
 
-        
+
         console.log(tempRooms)
     }
 

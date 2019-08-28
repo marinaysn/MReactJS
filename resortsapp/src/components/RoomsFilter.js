@@ -20,7 +20,7 @@ export default function RoomsFilter() {
     let types = getUnique(rooms, 'type');
 
     //add all
-    types = ['all', ...types];
+    types = ['all', ...types.reverse()];
 
     //map to jsx
     types = types.map((i, index) => {
@@ -31,10 +31,10 @@ export default function RoomsFilter() {
      let guest = getUnique(rooms, 'capacity');
 
      //map to jsx
-     guest = guest.map((i, index) => {
+     guest = guest.reverse().map((i, index) => {
          return <option value={i} key={index}>{i}</option>
      });
- 
+
 
 
     return (
