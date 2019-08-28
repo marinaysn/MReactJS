@@ -27,15 +27,13 @@ export default function RoomsFilter() {
         return <option value={i} key={index}>{i}</option>
     });
 
-     //get unique capacity
-     let guest = getUnique(rooms, 'capacity');
+    //get unique capacity
+    let guest = getUnique(rooms, 'capacity');
 
-     //map to jsx
-     guest = guest.reverse().map((i, index) => {
-         return <option value={i} key={index}>{i}</option>
-     });
-
-
+    //map to jsx
+    guest = guest.reverse().map((i, index) => {
+        return <option value={i} key={index}>{i}</option>
+    });
 
     return (
         <section className="filter-container">
@@ -77,20 +75,68 @@ export default function RoomsFilter() {
                 {/* Price Range Filter*/}
                 <div className="form-group">
                     <label htmlFor="price">Price: ${price}</label>
-                <input 
-                type="range" 
-                name="price" 
-                min={minPrice} 
-                max={maxPrice} 
-                id="price" 
-                value={price} 
-                className="form-control" 
-                onChange={handleChange} />
+                    <input
+                        type="range"
+                        name="price"
+                        min={minPrice}
+                        max={maxPrice}
+                        id="price"
+                        value={price}
+                        className="form-control"
+                        onChange={handleChange} />
                 </div>
                 {/* end of Price Range Filter*/}
 
-                {/*  */}
-                {/* end of  */}
+                {/* Size Filter */}
+
+
+                <div className="form-group">
+                    <label htmlFor="size">Room Size:</label>
+                    <div className="size-inputs">
+                        <input
+                            type="number"
+                            name="minSize"
+                            id="size"
+                            value={minSize}
+                            className="size-input"
+                            onChange={handleChange} />
+                        <input
+                            type="number"
+                            name="maxSize"
+                            id="size"
+                            value={maxSize}
+                            className="size-input"
+                            onChange={handleChange} />
+                    </div>
+                </div>
+                {/* end of Size Filter  */}
+
+
+                {/* Extras: Pet and Brakfast */}
+                <div className="form-group">
+                    <div className="single-extra">
+                        <input
+                            type="checkbox"
+                            name="breakfast"
+                            id="breakfast"
+                            checked={breakfast}
+                            onChange={handleChange} />
+                        <label htmlFor="breakfast">Breakfast</label>
+                    </div>
+
+                    <div className="single-extra">
+                        <input
+                            type="checkbox"
+                            name="pets"
+                            id="pets"
+                            checked={pets}
+                            onChange={handleChange} />
+                        <label htmlFor="pets">Pets</label>
+                    </div>
+                </div>
+                {/* end of Extras */}
+
+
             </form>
         </section>
     )
