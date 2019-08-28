@@ -26,9 +26,12 @@ class RoomProvider extends Component {
 
     componentDidMount() {
         let rooms = this.formatData(items);
+        rooms = rooms.reverse();
         let featuredRooms = rooms.filter(room => room.featured === true);
         let maxPr = Math.max(...rooms.map(i => i.price));
         let maxS = Math.max(...rooms.map(i => i.size));
+
+        let minPr = Math.min(...rooms.map(i => i.price));
 
         this.setState({
             rooms,
@@ -37,7 +40,8 @@ class RoomProvider extends Component {
             loading: false,
             price: maxPr,
             maxPrice: maxPr,
-            maxSize: maxS
+            maxSize: maxS,
+            minPrice: minPr
         });
     }
 
@@ -56,6 +60,7 @@ class RoomProvider extends Component {
         const value = event.type === 'checkbox' ? target.checked : target.value;
         const name = event.target.name;
 
+        
         //run as callback function filterRooms
         this.setState({
             [name]: value
@@ -67,16 +72,38 @@ class RoomProvider extends Component {
         
         let {
             rooms, type, capacity, price, minSize, maxPrice,
-            breakfast, pets
+            breakfast, pets, minPrice
         } = this.state;
         
+        //all the rooms
         let tempRooms = [...rooms];
+        //transform values for type
+            capacity = parseInt(capacity);
+            price = parseInt(price);
+
+            //filter by type
         if (type !=='all'){
             tempRooms = tempRooms.filter(r => r.type === type) 
+            
         }
+        //filter by capacity
+        if (capacity !==1){
+            tempRooms = tempRooms.filter(r => r.capacity >=capacity) 
+        }
+
+
+        console.log(minPrice)
+        //filter by price
+        if (price => minPrice){
+            tempRooms = tempRooms.filter(r => r.price <= price) 
+        }
+
+
         this.setState({
-            sortedRooms: tempRooms
+            sortedRooms: tempRooms,
+            minPrice: Math.min(...tempRooms.map(i => i.price))
         })
+
         
         console.log(tempRooms)
     }
