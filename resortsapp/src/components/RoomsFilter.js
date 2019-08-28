@@ -20,7 +20,7 @@ export default function RoomsFilter() {
     let types = getUnique(rooms, 'type');
 
     //add all
-    types = ['all', ...types.reverse()];
+    types = ['All', ...types.reverse()];
 
     //map to jsx
     types = types.map((i, index) => {
@@ -38,7 +38,7 @@ export default function RoomsFilter() {
     return (
         <section className="filter-container">
 
-            <Title title="Quick Rooms Search" />
+            <Title title="Quick Room Search" />
 
             <form className="filter-form">
                 {/* Select Type*/}
@@ -121,7 +121,7 @@ export default function RoomsFilter() {
                             id="breakfast"
                             checked={breakfast}
                             onChange={handleChange} />
-                        <label htmlFor="breakfast">Breakfast</label>
+                        <label htmlFor="breakfast">Breakfast Included</label>
                     </div>
 
                     <div className="single-extra">
@@ -131,7 +131,7 @@ export default function RoomsFilter() {
                             id="pets"
                             checked={pets}
                             onChange={handleChange} />
-                        <label htmlFor="pets">Pets</label>
+                        <label htmlFor="pets">Pets Allowed</label>
                     </div>
                 </div>
                 {/* end of Extras */}
