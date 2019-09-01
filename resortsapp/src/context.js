@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import items from "./data";
+// import items from "./data";
+import Client from "./Contentful";
+
+//will use in geetData function
+
+// Client.getEntries({
+//     content_type: "beachResortApp"
+// })
+// .then((response) => console.log(response.items))
+// .catch(console.error);
 
 const RoomContext = React.createContext();
 
@@ -23,26 +32,65 @@ class RoomProvider extends Component {
     };
 
     //getData
+    getData = async () => {
+        try {
+
+            let response = await Client.getEntries({
+                content_type: "beachResortApp",
+                order: 'fields.price'
+            });
+
+            console.log(response.items);
+
+            let rooms = this.formatData(response.items);
+            rooms = rooms.reverse(); // need to rander all rooms in desc. order
+            let featuredRooms = rooms.filter(room => room.featured === true);
+            let maxPr = Math.max(...rooms.map(i => i.price));
+            let maxS = Math.max(...rooms.map(i => i.size));
+    
+            let minPr = Math.min(...rooms.map(i => i.price));
+    
+            this.setState({
+                rooms,
+                featuredRooms,
+                sortedRooms: rooms,
+                loading: false,
+                price: maxPr,
+                maxPrice: maxPr,
+                maxSize: maxS,
+                minPrice: minPr
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     componentDidMount() {
-        let rooms = this.formatData(items);
-        rooms = rooms.reverse(); // need to rander all rooms in desc. order
-        let featuredRooms = rooms.filter(room => room.featured === true);
-        let maxPr = Math.max(...rooms.map(i => i.price));
-        let maxS = Math.max(...rooms.map(i => i.size));
 
-        let minPr = Math.min(...rooms.map(i => i.price));
+        this.getData();
 
-        this.setState({
-            rooms,
-            featuredRooms,
-            sortedRooms: rooms,
-            loading: false,
-            price: maxPr,
-            maxPrice: maxPr,
-            maxSize: maxS,
-            minPrice: minPr
-        });
+        // used in getData function
+
+        // let rooms = this.formatData(items);
+        // rooms = rooms.reverse(); // need to rander all rooms in desc. order
+        // let featuredRooms = rooms.filter(room => room.featured === true);
+        // let maxPr = Math.max(...rooms.map(i => i.price));
+        // let maxS = Math.max(...rooms.map(i => i.size));
+
+        // let minPr = Math.min(...rooms.map(i => i.price));
+
+        // this.setState({
+        //     rooms,
+        //     featuredRooms,
+        //     sortedRooms: rooms,
+        //     loading: false,
+        //     price: maxPr,
+        //     maxPrice: maxPr,
+        //     maxSize: maxS,
+        //     minPrice: minPr
+        // });
     }
 
 
@@ -82,10 +130,11 @@ class RoomProvider extends Component {
         price = parseInt(price);
 
         //filter by type
-        if (type !== 'All') {
+        if (type !== 'all') {
             tempRooms = tempRooms.filter(r => r.type === type)
 
         }
+
         //filter by capacity
         if (capacity !== 1) {
             tempRooms = tempRooms.filter(r => r.capacity >= capacity)
@@ -101,10 +150,12 @@ class RoomProvider extends Component {
 
         //pets and breakfast
         if (pets) {
-        tempRooms = tempRooms.filter(r => r.pets === true)}
+            tempRooms = tempRooms.filter(r => r.pets === true)
+        }
 
         if (breakfast) {
-        tempRooms = tempRooms.filter(r => r.breakfast === true)}
+            tempRooms = tempRooms.filter(r => r.breakfast === true)
+        }
 
 
         this.setState({
@@ -116,7 +167,7 @@ class RoomProvider extends Component {
 
         console.log(tempRooms)
     }
-    
+
 
     formatData(items) {
         let tempItems = items.map(item => {

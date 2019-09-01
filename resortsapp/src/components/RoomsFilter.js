@@ -20,7 +20,7 @@ export default function RoomsFilter() {
     let types = getUnique(rooms, 'type');
 
     //add all
-    types = ['All', ...types.reverse()];
+    types = ['all', ...types.reverse()];
 
     //map to jsx
     types = types.map((i, index) => {
