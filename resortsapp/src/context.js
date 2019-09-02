@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 // import items from "./data";
 import Client from "./Contentful";
 
-//will use in geetData function
-
-// Client.getEntries({
-//     content_type: "beachResortApp"
-// })
-// .then((response) => console.log(response.items))
-// .catch(console.error);
-
 const RoomContext = React.createContext();
 
 class RoomProvider extends Component {
@@ -37,13 +29,14 @@ class RoomProvider extends Component {
 
             let response = await Client.getEntries({
                 content_type: "beachResortApp",
-                order: 'fields.price'
+                order: '-fields.price,fields.capacity',
+                
             });
 
             console.log(response.items);
 
             let rooms = this.formatData(response.items);
-            rooms = rooms.reverse(); // need to rander all rooms in desc. order
+          
             let featuredRooms = rooms.filter(room => room.featured === true);
             let maxPr = Math.max(...rooms.map(i => i.price));
             let maxS = Math.max(...rooms.map(i => i.size));
@@ -132,7 +125,6 @@ class RoomProvider extends Component {
         //filter by type
         if (type !== 'all') {
             tempRooms = tempRooms.filter(r => r.type === type)
-
         }
 
         //filter by capacity
